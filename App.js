@@ -1,90 +1,66 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-// const heading = React.createElement(
-//   "h1",
-//   { id: "heading", xyz : "abc"},
-//   "Hello world from React!"
+// Core React element
+// const heading = React.createElement("h1", { id: "heading" }, "Namaste React");
+// console.log(heading);
+
+// // JSX
+// // const jsxHeading = <h1 className="heading">Namaste React using JSX</h1>;
+// // multiple line
+// const jsxHeading = (
+//   <h1 className="heading">
+//     Namaste React using JSX
+//   </h1>
 // );
+// // console.log(jsxHeading);
 
-// console.log(heading); //object
+// // Both are same
+// const fn = () => true;
+// const fn2 = () => {
+//   return true;
+// }
 
-// const root = ReactDOM.createRoot(document.getElementById("root"));
+// // React functional Component, we can skip return statement
+// const HeadingComponent = () => {
+//   return <h1>Namaste React Functional Component</h1>;
+// }
+// const HeadingComponent2 = () => {
+//   <h1>Namaste React Functional Component</h1>;
+// }
 
-// root.render(heading);  //Take the object, creates the tag and put the tag inside root
-
-// /**
-//  *
-//  * <div id = "parent">
-//  *  <div id = "child">
-//  *      <h1>I am h1 tag</h1>
-//  *  </div>
-//  * </div>
-//  *
-//  **/
-
-// const parent = React.createElement(
-//     "div",
-//     {id : "parent"},
-//     React.createElement(
-//         "div",
-//         {id : "child"},
-//         React.createElement("h1", {}, "I am h1 tag")
-//     )
-// )
-// console.log(parent)
-// const root = ReactDOM.createRoot(document.getElementById("root"));
-// root.render(parent)
-
-/**
- *
- * <div id = "parent">
- *  <div id = "child">
- *      <h1>I am h1 tag</h1>
- *      <h2>I am h2 tag</h2>
- *  </div>
- * </div>
- *
- **/
-
-// const parent = React.createElement(
-//   "div",
-//   { id: "parent" },
-//   React.createElement("div", { id: "child" }, [
-//     React.createElement("h1", {}, "I am h1 tag"),
-//     React.createElement("h2", {}, "I am h2 tag"),
-//   ])
-// );
-// console.log(parent);
-// const root = ReactDOM.createRoot(document.getElementById("root"));
-// root.render(parent);
-
-/**
- *
- * <div id = "parent">
- *  <div id = "child">
- *      <h1>I am h1 tag</h1>
- *      <h2>I am h2 tag</h2>
- *  </div>
- *  <div id = "child2">
- *      <h1>I am h1 tag</h1>
- *      <h2>I am h2 tag</h2>
- *  </div>
- * </div>
- *
- **/
-
-const parent = React.createElement("div", { id: "parent" }, [
-  React.createElement("div", { id: "child" }, [
-    React.createElement("h1", {}, "I am h1 tag"),
-    React.createElement("h2", {}, "I am h2 tag"),
-  ]),
-  React.createElement("div", { id: "child" }, [
-    React.createElement("h1", {}, "I am h1 tag"),
-    React.createElement("h2", {}, "I am h2 tag"),
-  ]),
-]);
-
-console.log(parent);
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(parent);
+
+// // Rendering React element
+// root.render(jsxHeading);
+
+// // Rendering React functional component
+// root.render(<HeadingComponent/>)
+const Title =  (
+  <div>
+    <h3>Hello Title Component</h3>
+  </div>
+);
+const AyushComponent = () => (
+    <div>
+      <h3>Hello Ayush Component</h3>
+    </div>
+);
+
+const number = 1000;
+// Component composition
+const AyushComponent2 = () => (
+    <div id="container">
+      {/* We can write javascript in curly braces */}
+      {number}
+      {Title}
+      <h2>{number}</h2>
+      {/* These three things are same */}
+      {AyushComponent()}
+      <AyushComponent />
+      <AyushComponent></AyushComponent>   
+      <h1>Working in Deloitte</h1>
+    </div>
+);
+
+root.render(<AyushComponent2 />);
