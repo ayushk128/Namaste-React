@@ -1,66 +1,94 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-// Core React element
-// const heading = React.createElement("h1", { id: "heading" }, "Namaste React");
-// console.log(heading);
+/**
+ * Header
+ *  -Logo
+ *  -Nav Item
+ * Body
+ *  -Search
+ *  -RestaurantContainer
+ *    -RestaurantCard
+ *        -Img
+ *        -Name of restaurant, star rating, cuisins, delivery time etc
+ * Footer
+ *  -Copyright
+ *  -Links
+ *  -Address
+ *  -Contact
+ * **/
 
-// // JSX
-// // const jsxHeading = <h1 className="heading">Namaste React using JSX</h1>;
-// // multiple line
-// const jsxHeading = (
-//   <h1 className="heading">
-//     Namaste React using JSX
-//   </h1>
-// );
-// // console.log(jsxHeading);
+const Header = () => {
+  return (
+    <div className="header">
+      <div className="logo-container">
+        <img
+          className="logo"
+          src="https://s3.amazonaws.com/ionic-marketplace/food-ordering-restaurant-delivery-app/icon.png"
+        />
+      </div>
 
-// // Both are same
-// const fn = () => true;
-// const fn2 = () => {
-//   return true;
-// }
+      <div className="nav-items">
+        <ul>
+          <li>Home</li>
+          <li>About Us</li>
+          <li>Contact Us</li>
+          <li>Cart</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
 
-// // React functional Component, we can skip return statement
-// const HeadingComponent = () => {
-//   return <h1>Namaste React Functional Component</h1>;
+// We can also destructure as {resName, cuisine}
+const RestaurantCard = (props) => {
+  const {resName, cuisine} = props
+  console.log(props);
+  return (
+    <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
+      <img
+        className="res-logo"
+        alt="res-logo"
+        src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/e33e1d3ba7d6b2bb0d45e1001b731fcf"
+      />
+      <h3>{resName}</h3>
+      <h4>{cuisine}</h4>
+      <h4>4.5</h4>
+      <h4>38 minutes</h4>
+    </div>
+  );
+};
+
+// const Footer = () => {
+//   return(
+//     <div className="footer">
+
+//     </div>
+//   )
 // }
-// const HeadingComponent2 = () => {
-//   <h1>Namaste React Functional Component</h1>;
-// }
+const Body = () => {
+  return (
+    <div className="body">
+      <div className="search">Search</div>
+      <div className="res-container">
+        <RestaurantCard
+          resName="Meghna Foods"
+          cuisine="Biryani, North Indian, Asian"
+        />
+        <RestaurantCard resName="KFC" cuisine="Burger, Fast Food" />
+      </div>
+    </div>
+  );
+};
+
+const AppLayout = () => {
+  return (
+    <div className="app">
+      <Header />
+      <Body />
+    </div>
+  );
+};
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
-// // Rendering React element
-// root.render(jsxHeading);
-
-// // Rendering React functional component
-// root.render(<HeadingComponent/>)
-const Title =  (
-  <div>
-    <h3>Hello Title Component</h3>
-  </div>
-);
-const AyushComponent = () => (
-    <div>
-      <h3>Hello Ayush Component</h3>
-    </div>
-);
-
-const number = 1000;
-// Component composition
-const AyushComponent2 = () => (
-    <div id="container">
-      {/* We can write javascript in curly braces */}
-      {number}
-      {Title}
-      <h2>{number}</h2>
-      {/* These three things are same */}
-      {AyushComponent()}
-      <AyushComponent />
-      <AyushComponent></AyushComponent>   
-      <h1>Working in Deloitte</h1>
-    </div>
-);
-
-root.render(<AyushComponent2 />);
+root.render(<AppLayout />);
