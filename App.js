@@ -43,7 +43,16 @@ const Header = () => {
 // We can also destructure as {resName, cuisine}
 const RestaurantCard = (props) => {
   const { resData } = props;
-  console.log(props);
+
+  // optional chaining
+  const {
+    cloudinaryImageId,
+    name,
+    cuisines,
+    avgRating,
+    costForTwo,
+    deliveryTime,
+  } = resData?.info;
   return (
     <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
       <img
@@ -51,14 +60,14 @@ const RestaurantCard = (props) => {
         alt="res-logo"
         src={
           "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-          resData.info.cloudinaryImageId
+          cloudinaryImageId
         }
       />
-      <h3>{resData.info.name}</h3>
-      {/* <h4>{resData.info.cuisines.join(", ")}</h4> */}
-      <h4>{resData.info.avgRating} stars</h4>
-      <h4>{resData.info.costForTwo}</h4>
-      <h4>{resData.info.sla.deliveryTime} minutes</h4>
+      <h3>{name}</h3>
+      {/* <h4>{cuisines.join(", ")}</h4> */}
+      <h4>{avgRating} stars</h4>
+      <h4>{costForTwo}</h4>
+      <h4>{deliveryTime} minutes</h4>
     </div>
   );
 };
@@ -1980,6 +1989,7 @@ const resList = [
     },
   },
 ];
+
 // const Footer = () => {
 //   return(
 //     <div className="footer">
@@ -1987,20 +1997,16 @@ const resList = [
 //     </div>
 //   )
 // }
+
+// not using keys (not acceptable) <<<< index as key <<<<<<<<<<< unique id(best practice)
 const Body = () => {
   return (
     <div className="body">
       <div className="search">Search</div>
       <div className="res-container">
-        <RestaurantCard resData={resList[0]} />
-        <RestaurantCard resData={resList[1]} />
-        <RestaurantCard resData={resList[2]} />
-        <RestaurantCard resData={resList[3]} />
-        <RestaurantCard resData={resList[4]} />
-        <RestaurantCard resData={resList[5]} />
-        <RestaurantCard resData={resList[6]} />
-        <RestaurantCard resData={resList[7]} />
-        <RestaurantCard resData={resList[8]} />
+        {resList.map((restaurant, index) => (
+          <RestaurantCard key = {restaurant.info.id} resData={restaurant} />
+        ))}
       </div>
     </div>
   );
