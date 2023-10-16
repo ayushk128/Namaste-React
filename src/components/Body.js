@@ -1,23 +1,22 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
-import resList from "../utils/mockData";
 
 // not using keys (not acceptable) <<<< index as key <<<<<<<<<<< unique id(best practice)
 const Body = () => {
-  const [listOfRestaurants, setListOfRestaurants] = useState(resList);
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9095043&lng=77.6666806&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=24.2068407&lng=86.265377&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
 
     const json = await data.json();
+
     console.log(json);
-  };
+    setListOfRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+  }
 
   return (
     <div className="body">
