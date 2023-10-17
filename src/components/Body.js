@@ -1,5 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
 
 // not using keys (not acceptable) <<<< index as key <<<<<<<<<<< unique id(best practice)
 const Body = () => {
@@ -22,10 +23,9 @@ const Body = () => {
     );
   };
 
-  if(listOfRestaurants.length === 0) {
-    return <h1>Loading.....</h1>
-  }
-  return (
+  return listOfRestaurants.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
         <button
