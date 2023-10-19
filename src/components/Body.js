@@ -5,6 +5,7 @@ import Shimmer from "./Shimmer";
 // not using keys (not acceptable) <<<< index as key <<<<<<<<<<< unique id(best practice)
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   const [searchText, setSearchText] = useState("");
 
@@ -22,6 +23,9 @@ const Body = () => {
 
     console.log(json);
     setListOfRestaurants(
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setFilteredRestaurants(
       json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
@@ -44,10 +48,11 @@ const Body = () => {
             onClick={() => {
               console.log(searchText);
 
-              const filteredList = listOfRestaurants.filter(
-                (res) => {res.data.cards[2].card.card.gridElements.infoWithStyle.restaurants.name.includes(searchText);
-              });
-              setListOfRestaurants(filteredList);
+              const filteredList = listOfRestaurants.filter((res) =>
+                res.info.name.toLowerCase().includes(searchText.toLocaleLowerCase())
+              );
+
+              setFilteredRestaurants(filteredList);
             }}
           >
             Search
@@ -66,7 +71,7 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {listOfRestaurants.map((restaurant) => (
+        {filteredRestaurants.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
